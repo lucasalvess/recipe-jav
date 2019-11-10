@@ -12,6 +12,7 @@ public class Conexao {
 	}
 	
 	public static Connection conecta() throws SQLException {
+		
 		return DriverManager.getConnection("jdbc:mysql://localhost:80/controle-receitas","lucas","password");
 	}
 }

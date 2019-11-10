@@ -16,7 +16,7 @@ public class UsuarioDAO {
 
 	private Connection con;
 
-	public UsuarioDAO() throws SQLException {
+	public UsuarioDAO() throws SQLException, ClassNotFoundException {
 		this.con = Conexao.conecta();
 	}
 		
@@ -89,18 +89,21 @@ public class UsuarioDAO {
 			
 		}
 		
-		//Busca Usuario by id ------------------------------------------------------------------------------------------
+		//Find Usuario by email and passwor ------------------------------------------------------------------------------------------
 		
-		public Usuario busca(Usuario usuario) throws SQLException {
+		public Usuario logar(Usuario usuario) throws SQLException {
 			try {
-				String sql = "select * from usuarios where id=?";
+				String sql = "select * from usuarios where email=? and senha=?";
 				PreparedStatement stmt = con.prepareStatement(sql);
-				stmt.setInt(1, usuario.getId());
+				stmt.setString(1, usuario.getEmail());
+				stmt.setString(2, usuario.getSenha());
+
 				
 				if (stmt.execute()) {
 					ResultSet rs = stmt.getResultSet();
 					
 					if (rs.next()) { // monta receita
+						usuario.setId(rs.getInt("id"));
 						usuario.setNome(rs.getString("nome"));
 						usuario.setEmail(rs.getString("email"));
 					}	
