@@ -1,17 +1,12 @@
-<?php 
-require_once('../help/erros.php');
-require_once('../model/Usuario.php');
+<%@page import="br.com.dasa.recipe.model.Usuario"%>
 
-$u = new Usuario();
 
-$u = unserialize($_SESSION['usuario']);
 
-?>
 <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-warning p-4">
-      <h5 class="text-white h4"><?=$u->getNome()?></h5>
-      <span class="text-muted"><?=$u->getEmail()?></span>
+      <h5 class="text-white h4">${usuario.nome}</h5>
+      <span class="text-muted">${usuario.email}</span>
     </div>
   </div>
   <nav class="navbar navbar-light bg-light">

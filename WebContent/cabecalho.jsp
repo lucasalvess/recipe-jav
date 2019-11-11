@@ -1,3 +1,11 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="java.util.List"%>
+<%@page import="br.com.dasa.recipe.model.Receita"%>
+<%@page import="br.com.dasa.recipe.controller.ReceitaController"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <html lang="pt-br">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />

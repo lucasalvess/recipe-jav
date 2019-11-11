@@ -8,11 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import br.com.dasa.recipe.dao.ReceitaDAO;
 import br.com.dasa.recipe.dao.UsuarioDAO;
 import br.com.dasa.recipe.model.Usuario;
 
-@WebServlet(urlPatterns = "/login")
+
 public class Login extends HttpServlet{
 
 	public Login() {
@@ -27,15 +29,64 @@ public class Login extends HttpServlet{
 		Usuario usuario = new Usuario();
 		usuario.setEmail(email);
 		usuario.setSenha(senha);
-		
-		PrintWriter writer = resp.getWriter();
-		
+				
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			if(usuarioDAO.logar(usuario)!=null) {
-				writer.println("Logou o usuario"+ usuario.getId());
+			ReceitaDAO receitaDAO = new ReceitaDAO();
+			
+			usuario = usuarioDAO.logar(usuario);
+			if(usuario.getId()!=0) {	
+
+				//Cria uma sessão com o usuario
+                HttpSession session=req.getSession(true);
+
+                session.setAttribute("usuario", usuario);
+                
+                req.setAttribute("receitas", receitaDAO.lista());
+                
+				req.getRequestDispatcher("painel.jsp").forward(req, resp); 
+
 			}else {
-				writer.println("usuario invalido");
+				req.setAttribute("mensagem", "Usuário sem permissão");
+				req.getRequestDispatcher("index.jsp").forward(req, resp);
+
+
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String email = req.getParameter("email");
+		String senha = req.getParameter("senha");
+		
+		Usuario usuario = new Usuario();
+		usuario.setEmail(email);
+		usuario.setSenha(senha);
+				
+		try {
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+			
+			usuario = usuarioDAO.logar(usuario);
+			if(usuario.getId()!=0) {	
+
+				//Cria uma sessão com o usuario
+                HttpSession session=req.getSession(true);
+
+                session.setAttribute("usuario", usuario);
+                //envia para controller do painelç
+               resp.sendRedirect("painelController");
+               
+			}else {
+				req.setAttribute("mensagem", "Usuário sem permissão");
+				req.getRequestDispatcher("index.jsp").forward(req, resp);
+				
+
 			}
 		} catch(Exception e) {
 			System.out.println(e);

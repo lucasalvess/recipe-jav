@@ -1,27 +1,18 @@
-<?php
-require_once('cabecalho.php');
-require_once('nav-sub.php');
-require_once('../help/erros.php');
-require_once('../controller/retornaReceitaController.php');
-
-$rc = new RetornaReceitaController();
-
-$ingredientes = $rc->ingredientes();
-
-?>
+<jsp:include page="cabecalho.jsp"></jsp:include>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="mt-2 mb-2 text-center ">
 	<img class="animated bounce infinite" src="src/cooking-pot.svg" width="150em">
 	<h1 class="lobster">Cozinhando...</h1>
 </div>
 
-<form id="form_receita" class="col-md-6 col-sm-12 offset-md-3 animated  fadeInLeft slow" method="post" action="../controller/salvaReceitaController">
+<form id="form_receita" class="col-md-6 col-sm-12 offset-md-3 animated  fadeInLeft slow" method="POST" action="salvaReceita">
 	<div class="form-group">
 		<label class="text-left" for="nome">Nome da receita</label>
 		<input type="text" class="form-control" id="nome" placeholder="Minha receita" name="nome" required>
 	</div>
 	<div class="form-group">
-		<label class="text-left" for="desc">DescriÃ§Ã£o</label>
+		<label class="text-left" for="desc">Descrição</label>
 		<textarea class="form-control" id="desc" name="descricao" required></textarea>
 	</div>
 
@@ -32,7 +23,7 @@ $ingredientes = $rc->ingredientes();
 	<div class="row">
 		<div class='form-group date col-6'>
 			<label for="tempo">Tempo de preparo</label>		
-			<input type='time' class="form-control" name="tempo" id="tempo" required/>
+			<input type='text' class="form-control" name="tempo" id="tempo" required/>
 		</div>
 		<div class="form-group col-6 mb-3">
 			<div class="text-left">
@@ -54,11 +45,12 @@ $ingredientes = $rc->ingredientes();
 	<div class="form-group date">
 		<label class="input-text" for="medida" >Ingredientes</label>
 		<select id="ingredientes" name="ingredientes[]" class="form-control custom-select" multiple >
-			<?php foreach ($ingredientes as $i) : ?>
+			
+			<c:forEach var="ingrediente" items="${ingredientes}">
 
-				<option value="<?=$i->getId()?>"><?=$i->getNome()?></option>
+				<option value="${ingrediente.id}">${ingrediente.nome}</option>
 
-			<?php endforeach ?>
+			</c:forEach>
 		</select>
 	</div>
 
@@ -72,4 +64,4 @@ $ingredientes = $rc->ingredientes();
 <!-- Monta logica de adicionar ingredientes -->
 <script type="text/javascript" src="js/tail.active.js"></script>
 
-<?php require_once('rodape.php') ?>
+<jsp:include page="rodape.jsp"></jsp:include>

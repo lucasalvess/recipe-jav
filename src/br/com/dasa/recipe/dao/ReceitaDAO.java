@@ -10,33 +10,35 @@ import java.util.List;
 
 import br.com.dasa.recipe.config.Conexao;
 import br.com.dasa.recipe.model.Receita;
+import br.com.dasa.recipe.model.Usuario;
 
 public class ReceitaDAO {
 
 	private Connection con;
 
-	public ReceitaDAO() throws SQLException {
+	public ReceitaDAO() throws SQLException, ClassNotFoundException {
 		this.con = Conexao.conecta();
 	}
 		
 		// INSERE RECEITA--------------------------------------------------------------------------------------
-		public void salva(Receita receita) throws SQLException {
-			String sql = "insert into produto(nome,descricao,categoria,tempo,passos) values(?,?,?,?,?)";
+		public void salva(Receita receita,Usuario usuario) throws SQLException {
+			String sql = "insert into receitas(nome,descricao,categoria,tempo,passos,usuario_id) values(?,?,?,?,?,?)";
 			try (PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 				stmt.setString(1, receita.getNome());
 				stmt.setString(2, receita.getDescricao());
 				stmt.setString(3, receita.getCategoria());
-				stmt.setString(4, receita.getPassos());
-				stmt.setString(5, receita.getTempo());
+				stmt.setString(5, receita.getPassos());
+				stmt.setString(4, receita.getTempo());
+				stmt.setInt(6, usuario.getId());
 				stmt.execute();
 
-				try (ResultSet rs = stmt.getGeneratedKeys()) {
-					if (rs.next()) {// se tiver o proximo valor pra ver
-						int id = rs.getInt("id");
-						receita.setId(id);
-					}
-
-				}
+//				try (ResultSet rs = stmt.getGeneratedKeys()) {
+//					if (rs.next()) {// se tiver o proximo valor pra ver
+//						int id = rs.getInt("id");
+//						receita.setId(id);
+//					}
+//
+//				}
 			}finally {
 				con.close();
 			}

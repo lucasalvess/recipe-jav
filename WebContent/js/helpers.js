@@ -4,7 +4,7 @@ function goBack(){
 }
 
 function acessaReceita($id){
-	document.location.href='receita.php?r='+$id;
+	document.location.href='receita.jsp?r='+$id;
 }
 
 $(function(){

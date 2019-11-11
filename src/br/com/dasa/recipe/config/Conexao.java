@@ -6,13 +6,9 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 public class Conexao {
-	
-	public Conexao() throws SQLException {
-		this.conecta();
-	}
-	
-	public static Connection conecta() throws SQLException {
 		
-		return DriverManager.getConnection("jdbc:mysql://localhost:80/controle-receitas","lucas","password");
+	public static Connection conecta() throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
+		return DriverManager.getConnection("jdbc:mysql://localhost/controle_receitas","lucas","password");
 	}
 }

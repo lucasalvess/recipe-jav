@@ -1,13 +1,10 @@
-<?php 
-require_once('cabecalho.php');
-require_once('../help/erros.php');
-?>
+<jsp:include page="cabecalho.jsp"></jsp:include>
 <div class="mt-5 animated  fadeInLeft slow">
 	<div class="text-center ">
 		<img class="animated delay-2s rubberBand" src="src/apron.svg" width="200em" >
 		<h1 class="lobster">Cadastro</h1>
 	</div>
-	<form class="col-md-6 col-sm-12 offset-md-3" method="post" action="../controller/cadastroController.php">
+	<form class="col-md-6 col-sm-12 offset-md-3" method="POST" action="cadastra-usuario">
 		<div class="form-group ">
 			<label for="usuario">Nome de usuario</label>
 			<input type="text" class="form-control" id="usuario" name="usuario" aria-describedby="usuarioHelp" placeholder="Insira seu usuario" required>
@@ -28,9 +25,9 @@ require_once('../help/erros.php');
 			<button type="submit" class="btn btn-dark col-sm-4">Cadastrar</button>
 		</div>
 		<br>
-		<a href="login.php">J√° tem conta? ent√£o √© s√≥ logar ;)</a>	
+		<a href="index.jsp">J· tem conta? ent„o È sÛ logar ;)</a>	
 	</form>
 	
 </div>
 
-<?php require_once('rodape.php') ?>
+<jsp:include page="rodape.jsp"></jsp:include>
