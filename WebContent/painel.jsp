@@ -25,8 +25,8 @@
 							<td>${receita.nome}</td>
 							<td class="d-none d-md-table-cell">${receita.descricao}</td>
 							<td class="d-none d-md-table-cell">${receita.categoria}</td>
-							<td><a href="alteraReceita?${receita.id}"><button type="button" class="btn btn-primary">Editar</button></td></a>
-							<td><a href="excluiReceita?${receita.id}"><button type="button" class="btn btn-danger">Excluir</button></td></a>
+							<td><a href="alteraReceitaid=${receita.id}"><button type="button" class="btn btn-primary">Editar</button></td></a>
+							<td><a href="excluiReceita?id=${receita.id}"><button type="button" class="btn btn-danger">Excluir</button></td></a>
 						</tr>			
 			</c:forEach>		
 				</tbody>

@@ -58,4 +58,13 @@
 		<url-pattern>/salvaReceita</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>ExcluiReceitaController</servlet-name>
+		<servlet-class>br.com.dasa.recipe.servlet.ExcluiReceitaController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExcluiReceitaController</servlet-name>
+		<url-pattern>/excluiReceita</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

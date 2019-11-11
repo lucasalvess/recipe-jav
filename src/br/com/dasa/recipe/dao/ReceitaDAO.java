@@ -31,15 +31,7 @@ public class ReceitaDAO {
 				stmt.setString(4, receita.getTempo());
 				stmt.setInt(6, usuario.getId());
 				stmt.execute();
-
-//				try (ResultSet rs = stmt.getGeneratedKeys()) {
-//					if (rs.next()) {// se tiver o proximo valor pra ver
-//						int id = rs.getInt("id");
-//						receita.setId(id);
-//					}
-//
-//				}
-			}finally {
+				}finally {
 				con.close();
 			}
 		}
