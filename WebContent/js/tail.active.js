@@ -14,7 +14,7 @@
 			event.preventDefault();
 			var form_data = $(this).serialize();
 			$.ajax({
-				url:"controller/salvaReceitaController.php",
+				url:"/alteraReceita",
 				method:"POST",
 				data:form_data,
 				success:function(data)

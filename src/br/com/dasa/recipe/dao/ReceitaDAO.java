@@ -92,7 +92,7 @@ public class ReceitaDAO {
 
 		// ATUALIZA RECEITA--------------------------------------------------------------------------------------------
 
-		public boolean atualiza(Receita receita) throws SQLException {
+		public void atualiza(Receita receita) throws SQLException {
 			
 			try {
 				String sql = "UPDATE receitas set nome=?,descricao=?,categoria=?,passos=?,tempo=? WHERE id=?";
@@ -107,9 +107,8 @@ public class ReceitaDAO {
 				if (smtp.execute()) {
 					System.out.println("Atualizou a linha: ");
 				}
-				return true;
 			}catch(Exception e) {
-				return false;
+				System.out.println(e);
 			}finally {
 				con.close();
 			}
@@ -118,30 +117,32 @@ public class ReceitaDAO {
 		
 		//Busca receita by id ------------------------------------------------------------------------------------------
 		
-		public Receita busca(Receita receita) throws SQLException {
+		public Receita busca(String id) throws SQLException {
 			try {
 				String sql = "select * from receitas where id=?";
 				PreparedStatement stmt = con.prepareStatement(sql);
-				stmt.setInt(1, receita.getId());
+				stmt.setInt(1, Integer.parseInt(id));
+				Receita receita = new Receita();
 				
 				if (stmt.execute()) {
 					ResultSet rs = stmt.getResultSet();
 					
 					if (rs.next()) { // monta receita
+						receita.setId(rs.getInt("id"));
 						receita.setNome(rs.getString("nome"));
 						receita.setDescricao(rs.getString("descricao"));
 						receita.setCategoria(rs.getString("categoria"));
 						receita.setPassos(rs.getString("passos"));
 						receita.setTempo(rs.getString("tempo"));
 					}	
+					return receita;
 				}
 			} catch (Exception e) {
 				System.out.println(e);
 			}finally {
 				con.close();			
-				return receita;
 			}
-			
+			return null;			
 		}
 	}
 
