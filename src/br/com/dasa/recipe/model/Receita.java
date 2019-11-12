@@ -1,5 +1,7 @@
 package br.com.dasa.recipe.model;
 
+import java.util.List;
+
 public class Receita {
 	
 	private int id;
@@ -8,9 +10,16 @@ public class Receita {
 	private String Categoria;
 	private String passos;
 	private String tempo;
+	private List<Ingrediente> ingredientes;
 	
 	public int getId() {
 		return id;
+	}
+	public List<Ingrediente> getIngredientes() {
+		return ingredientes;
+	}
+	public void setIngredientes(List<Ingrediente> ingredientes) {
+		this.ingredientes = ingredientes;
 	}
 	public void setId(int id) {
 		this.id = id;
