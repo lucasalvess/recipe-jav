@@ -3,28 +3,33 @@
 <div class="mt-2 mb-2 text-center ">
 	<img class="animated bounce infinite" src="src/book.svg" width="150em">
 	<h1 class="lobster">${receita.nome}</h1>
-	<p class="text-muted"> Categoria: ${receita.categoria}</p>
-	<p class="text-muted"> Preparo: ${receita.tempo}</p>
+	<p class="text-muted">Categoria: ${receita.categoria}</p>
+	<p class="text-muted">Preparo: ${receita.tempo}</p>
 </div>
-<div class="mt-5 col-md-6 col-sm-12 offset-md-3 animated  fadeInLeft slow">
-	<h4>Descricao: </h4>
+<div
+	class="mt-5 col-md-6 col-sm-12 offset-md-3 animated  fadeInLeft slow">
+	<h4>Descricao:</h4>
 	<p>${receita.descricao}</p>
 </div>
-<div class="mt-5 col-md-6 col-sm-12 offset-md-3 animated delay-1s fadeInLeft slow">
-	<h4>Passo a passo: </h4>
+<div
+	class="mt-5 col-md-6 col-sm-12 offset-md-3 animated delay-1s fadeInLeft slow">
+	<h4>Passo a passo:</h4>
 	<p>${receita.passos}</p>
 </div>
-<div class="mt-5 col-md-6 col-sm-12 offset-md-3 animated delay-2s fadeInLeft slow">
-	<?php if ($ingredientes!= null):?>
-	<h4>Ingredientes: </h4>
-	<?php foreach ($ingredientes as $i) : ?>
-		<p> - <?=$i->getNome()?></li>
-		<?php endforeach; ?>
-	<?php endif; ?>	
+<div
+	class="mt-5 col-md-6 col-sm-12 offset-md-3 animated delay-2s fadeInLeft slow">
+	<h4>Ingredientes</h4>
+	<ul>
+		<c:if test="${ingredientes != null }">
+			<c:forEach var="ingrediente" items="${ingredientes}">
+				<li>${ingrediente.nome}</li>
+			</c:forEach>
+		</c:if>
+	</ul>
 </div>
 
 <div class="text-center">
-	
+
 	<button class="btn btn-outline-dark" onclick="goBack()">Voltar</button>
 </div>
 

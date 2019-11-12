@@ -29,14 +29,7 @@ public class UsuarioDAO {
 				stmt.setString(3, usuario.getSenha());
 				stmt.execute();
 
-				try (ResultSet rs = stmt.getGeneratedKeys()) {
-					if (rs.next()) {// se tiver o proximo valor pra ver
-						int id = rs.getInt("id");
-						usuario.setId(id);
-					}
-
-				}
-			}finally {
+				}finally {
 				con.close();
 			}
 		}
