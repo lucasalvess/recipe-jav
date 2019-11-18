@@ -45,7 +45,6 @@
 	<div class="form-group date">
 		<label class="input-text" for="medida" >Ingredientes</label>
 		<select id="ingredientes" name="ingredientes[]" class="form-control custom-select" multiple >
-			
 			<c:forEach var="ingrediente" items="${ingredientes}">
 
 				<option value="${ingrediente.id}">${ingrediente.nome}</option>

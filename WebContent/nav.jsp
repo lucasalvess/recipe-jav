@@ -1,4 +1,4 @@
-<%@page import="br.com.dasa.recipe.model.Usuario"%>
+<%@page import="src.br.com.dasa.recipe.model.Usuario"%>
 
 
 

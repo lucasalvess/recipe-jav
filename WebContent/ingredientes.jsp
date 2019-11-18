@@ -1,26 +1,3 @@
-<?php 
-require_once('cabecalho.php'); 
-require_once('../controller/ingredientesController.php');
-require_once('../controller/retornaReceitaController.php');
-require_once('../view/nav.php');
-include('../help/erros.php');
-
-$vazio = null;
-$ic = new IngredientesController();
-$rc = new retornaReceitaController();
-
-$r = new Receita();
-$r = $rc->retornaReceita($_GET['id']);
-
-$ingredientes = $p->listarIngredientes($ic);
-
-if($ingredientes == null){
-	$_SESSION['info'] = 'Insira os ingredientes';
-	$vazio = true;
-	include('../help/erros.php');
-}
-
-?>
 <div class="text-center">
 	<div class="mt-2 mb-2">
 		<img class="animated swing delay-2s" src="src/diet.svg" width="200em">
