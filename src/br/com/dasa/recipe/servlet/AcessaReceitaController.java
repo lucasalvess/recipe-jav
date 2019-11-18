@@ -13,9 +13,6 @@ import br.com.dasa.recipe.model.Receita;
 
 public class AcessaReceitaController extends HttpServlet {
 
-	public AcessaReceitaController() {
-
-	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -32,7 +29,5 @@ public class AcessaReceitaController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		
 	}	
-
 }

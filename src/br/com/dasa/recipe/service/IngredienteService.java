@@ -1,8 +1,8 @@
-package br.com.dasa.recipe.controller;
+package br.com.dasa.recipe.service;
 
-public class IngredienteController {
+public class IngredienteService {
 
-	public IngredienteController() {
+	public IngredienteService() {
 	}
 
 	public String comparaCategoria(String catSelect, String catReceita) {

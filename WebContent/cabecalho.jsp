@@ -1,7 +1,6 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.List"%>
 <%@page import="br.com.dasa.recipe.model.Receita"%>
-<%@page import="br.com.dasa.recipe.controller.ReceitaController"%>
+<%@page import="br.com.dasa.recipe.service.ReceitaService"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

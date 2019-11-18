@@ -13,10 +13,6 @@ import br.com.dasa.recipe.dao.IngredienteDAO;
 import br.com.dasa.recipe.model.Ingrediente;
 
 public class PreparaReceitaController extends HttpServlet {
-
-	public PreparaReceitaController() {
-	
-	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,10 +26,6 @@ public class PreparaReceitaController extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
-		}
-		
+		}	
 	}
-	
-	
-
 }

@@ -18,10 +18,6 @@ import br.com.dasa.recipe.model.Usuario;
 
 public class SalvaReceitaController extends HttpServlet{
 
-	public SalvaReceitaController() {
-		
-	}
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Receita receita = new Receita();

@@ -12,10 +12,6 @@ import br.com.dasa.recipe.model.Receita;
 
 public class AlteraReceitaController extends HttpServlet {
 
-	public AlteraReceitaController() {
-
-	}
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
