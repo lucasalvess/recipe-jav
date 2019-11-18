@@ -22,7 +22,7 @@ public class ReceitaDAO {
 		
 		// INSERE RECEITA--------------------------------------------------------------------------------------
 		public void salva(Receita receita,Usuario usuario) throws SQLException {
-			String sql = "insert into receitas(nome,descricao,categoria,tempo,passos,usuario_id) values(?,?,?,?,?,?)";
+			final String sql = "insert into receitas(nome,descricao,categoria,tempo,passos,usuario_id) values(?,?,?,?,?,?)";
 			try (PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 				stmt.setString(1, receita.getNome());
 				stmt.setString(2, receita.getDescricao());
@@ -43,8 +43,10 @@ public class ReceitaDAO {
 
 				Statement stmt = con.createStatement();// Statement prepara a query
 				List<Receita> listaDeReceitas = new ArrayList<Receita>();// Lista que vai ser retornada com os produtos
-
-				if (stmt.execute("select * from receitas")) {
+				
+				final String sql = "select * from receitas";
+				
+				if (stmt.execute(sql)) {
 					ResultSet rs = stmt.getResultSet();
 
 					while (rs.next()) { // monta lista de produtos
@@ -69,7 +71,7 @@ public class ReceitaDAO {
 		// DELETA RECEITA--------------------------------------------------------------------------------------------
 		public boolean deleta(Receita receita) {
 			try {
-				String sql = "delete from receitas where id= ?";
+				final String sql = "delete from receitas where id= ?";
 				PreparedStatement statement = con.prepareStatement(sql);
 				statement.setInt(1, receita.getId());
 				statement.execute();
@@ -95,7 +97,7 @@ public class ReceitaDAO {
 		public void atualiza(Receita receita) throws SQLException {
 			
 			try {
-				String sql = "UPDATE receitas set nome=?,descricao=?,categoria=?,passos=?,tempo=? WHERE id=?";
+				final String sql = "UPDATE receitas set nome=?,descricao=?,categoria=?,passos=?,tempo=? WHERE id=?";
 				PreparedStatement smtp = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 				smtp.setString(1, receita.getNome());
 				smtp.setString(2, receita.getDescricao());
@@ -119,7 +121,7 @@ public class ReceitaDAO {
 		
 		public Receita busca(String id) throws SQLException {
 			try {
-				String sql = "select * from receitas where id=?";
+				final String sql = "select * from receitas where id=?";
 				PreparedStatement stmt = con.prepareStatement(sql);
 				stmt.setInt(1, Integer.parseInt(id));
 				Receita receita = new Receita();

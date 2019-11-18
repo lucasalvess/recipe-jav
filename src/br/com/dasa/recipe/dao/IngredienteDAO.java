@@ -27,9 +27,9 @@ public class IngredienteDAO {
 
 			Statement stmt = con.createStatement();// Statement prepara a query
 			List<Ingrediente> listaDeIngredientes = new ArrayList<Ingrediente>();// Lista que vai ser retornada com os
-																					// produtos
+			final String sql = "select * from ingredientes";																		// produtos
 
-			if (stmt.execute("select * from ingredientes")) {
+			if (stmt.execute(sql)) {
 				ResultSet rs = stmt.getResultSet();
 
 				while (rs.next()) { // monta lista de ingredientes
@@ -53,7 +53,7 @@ public class IngredienteDAO {
 
 		try {
 			
-			String sql = "SELECT ingredientes.id , ingredientes.nome FROM `ingredientes`,`composicao` WHERE ingredientes.id = composicao.ingrediente_id and composicao.receita_id = ?";
+			final String sql = "SELECT ingredientes.id , ingredientes.nome FROM `ingredientes`,`composicao` WHERE ingredientes.id = composicao.ingrediente_id and composicao.receita_id = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);// Statement prepara a query
 			
 			stmt.setInt(1, receita.getId());

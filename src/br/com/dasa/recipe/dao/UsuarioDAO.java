@@ -22,7 +22,7 @@ public class UsuarioDAO {
 		
 		// INSERE Usuario--------------------------------------------------------------------------------------
 		public void salva(Usuario usuario) throws SQLException {
-			String sql = "insert into usuarios(nome,email,senha) values(?,?,?)";
+			final String sql = "insert into usuarios(nome,email,senha) values(?,?,?)";
 			try (PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 				stmt.setString(1, usuario.getNome());
 				stmt.setString(2, usuario.getEmail());
@@ -38,7 +38,7 @@ public class UsuarioDAO {
 		// DELETA USUARIO--------------------------------------------------------------------------------------------
 		public boolean deleta(Usuario usuario) {
 			try {
-				String sql = "delete from usuarios where id= ?";
+				final String sql = "delete from usuarios where id= ?";
 				PreparedStatement statement = con.prepareStatement(sql);
 				statement.setInt(1, usuario.getId());
 				statement.execute();
@@ -64,7 +64,7 @@ public class UsuarioDAO {
 		public boolean atualiza(Usuario usuario) throws SQLException {
 			
 			try {
-				String sql = "UPDATE usuarios set nome=?,email=?,senha=? WHERE id=?";
+				final String sql = "UPDATE usuarios set nome=?,email=?,senha=? WHERE id=?";
 				PreparedStatement smtp = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 				smtp.setString(1, usuario.getNome());
 				smtp.setString(2, usuario.getEmail());
@@ -86,7 +86,7 @@ public class UsuarioDAO {
 		
 		public Usuario logar(Usuario usuario) throws SQLException {
 			try {
-				String sql = "select * from usuarios where email=? and senha=?";
+				final String sql = "select * from usuarios where email=? and senha=?";
 				PreparedStatement stmt = con.prepareStatement(sql);
 				stmt.setString(1, usuario.getEmail());
 				stmt.setString(2, usuario.getSenha());
