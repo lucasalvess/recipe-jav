@@ -21,7 +21,7 @@ public class IngredienteDAO {
 	}
 
 	// LISTA INGREDIENTES----------------------------------------------------------------------------------------
-	public List<Ingrediente> lista() {
+	public List<Ingrediente> lista() throws SQLException {
 
 		try {
 
@@ -44,12 +44,14 @@ public class IngredienteDAO {
 			return listaDeIngredientes;
 		} catch (SQLException e) {
 			System.out.println(e);
+		}finally {
+			con.close();
 		}
 		return null;
 	}
 	
 	//INGREDIENTES DA RECEITA----------------------------------------------------------
-	public List<Ingrediente> lista(Receita receita) {
+	public List<Ingrediente> lista(Receita receita) throws SQLException {
 
 		try {
 			
@@ -78,6 +80,8 @@ public class IngredienteDAO {
 			
 		} catch (SQLException e) {
 			System.out.println(e);
+		}finally {
+			con.close();
 		}
 		return null;
 	}

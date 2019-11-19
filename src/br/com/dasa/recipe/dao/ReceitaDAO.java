@@ -37,7 +37,7 @@ public class ReceitaDAO {
 		}
 
 		// LISTA RECEITAS----------------------------------------------------------------------------------------
-		public List<Receita> lista() {
+		public List<Receita> lista() throws SQLException {
 
 			try {
 
@@ -64,12 +64,14 @@ public class ReceitaDAO {
 				return listaDeReceitas;
 			} catch (SQLException e) {
 				System.out.println(e);
+			}finally {
+				con.close();
 			}
 			return null;
 		}
 
 		// DELETA RECEITA--------------------------------------------------------------------------------------------
-		public boolean deleta(Receita receita) {
+		public boolean deleta(Receita receita) throws SQLException {
 			try {
 				final String sql = "delete from receitas where id= ?";
 				PreparedStatement statement = con.prepareStatement(sql);
@@ -83,11 +85,7 @@ public class ReceitaDAO {
 			} catch (Exception e) {
 				System.out.println(e);
 			} finally {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				con.close();
 			}
 			return false;
 		}
