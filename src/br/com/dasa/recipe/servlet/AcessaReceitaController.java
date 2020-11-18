@@ -1,16 +1,14 @@
 package br.com.dasa.recipe.servlet;
 
-import java.io.IOException;
+import br.com.dasa.recipe.dao.IngredienteDAO;
+import br.com.dasa.recipe.dao.ReceitaDAO;
+import br.com.dasa.recipe.model.Receita;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import br.com.dasa.recipe.dao.IngredienteDAO;
-import br.com.dasa.recipe.dao.ReceitaDAO;
-import br.com.dasa.recipe.model.Receita;
-import br.com.dasa.recipe.service.ReceitaService;
+import java.io.IOException;
 
 public class AcessaReceitaController extends HttpServlet {
 
@@ -19,7 +17,10 @@ public class AcessaReceitaController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			acessaReceita(req.getParameter("d"));			
+			ReceitaDAO receitaDAO = new ReceitaDAO();
+			IngredienteDAO ingredienteDAO =  new IngredienteDAO();
+
+			Receita receita = receitaDAO.busca(req.getParameter("r"));
 			req.setAttribute("receita", receita);
 			req.setAttribute("ingredientes", ingredienteDAO.lista(receita));
 			
