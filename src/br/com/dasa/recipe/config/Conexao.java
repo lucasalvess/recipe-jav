@@ -9,6 +9,6 @@ public class Conexao {
 		
 	public static Connection conecta() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
-		return DriverManager.getConnection("jdbc:mysql://localhost/controle_receitas","lucas","password");
+		return DriverManager.getConnection("jdbc:mysql://db/controle_receitas","lucas","password");
 	}
 }
