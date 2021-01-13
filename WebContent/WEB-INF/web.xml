@@ -34,7 +34,7 @@ http://xmlns.jcp.org/xml/ns/javaee "
 
 	<servlet>
 		<servlet-name>PainelController</servlet-name>
-		<servlet-class>br.com.dasa.recipe.servlet.PainelController</servlet-class>
+		<servlet-class>br.com.recipe.servlet.PainelController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PainelController</servlet-name>
@@ -43,7 +43,7 @@ http://xmlns.jcp.org/xml/ns/javaee "
 
 	<servlet>
 		<servlet-name>PreparaReceitaController</servlet-name>
-		<servlet-class>br.com.dasa.recipe.servlet.PreparaReceitaController</servlet-class>
+		<servlet-class>br.com.recipe.servlet.PreparaReceitaController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PreparaReceitaController</servlet-name>
@@ -52,7 +52,7 @@ http://xmlns.jcp.org/xml/ns/javaee "
 
 	<servlet>
 		<servlet-name>SalvaReceitaController</servlet-name>
-		<servlet-class>br.com.dasa.recipe.servlet.SalvaReceitaController</servlet-class>
+		<servlet-class>br.com.recipe.servlet.SalvaReceitaController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SalvaReceitaController</servlet-name>
@@ -61,7 +61,7 @@ http://xmlns.jcp.org/xml/ns/javaee "
 
 	<servlet>
 		<servlet-name>ExcluiReceitaController</servlet-name>
-		<servlet-class>br.com.dasa.recipe.servlet.ExcluiReceitaController</servlet-class>
+		<servlet-class>br.com.recipe.servlet.ExcluiReceitaController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ExcluiReceitaController</servlet-name>
@@ -70,7 +70,7 @@ http://xmlns.jcp.org/xml/ns/javaee "
 
 	<servlet>
 		<servlet-name>AlteraReceitaController</servlet-name>
-		<servlet-class>br.com.dasa.recipe.servlet.AlteraReceitaController</servlet-class>
+		<servlet-class>br.com.recipe.servlet.AlteraReceitaController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AlteraReceitaController</servlet-name>
@@ -79,7 +79,7 @@ http://xmlns.jcp.org/xml/ns/javaee "
 
 	<servlet>
 		<servlet-name>AcessaReceitaController</servlet-name>
-		<servlet-class>br.com.dasa.recipe.servlet.AcessaReceitaController</servlet-class>
+		<servlet-class>br.com.recipe.servlet.AcessaReceitaController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AcessaReceitaController</servlet-name>

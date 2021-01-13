@@ -1,7 +1,3 @@
-<%@page import="src.br.com.dasa.recipe.model.Usuario"%>
-
-
-
 <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-warning p-4">
