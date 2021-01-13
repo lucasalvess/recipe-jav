@@ -9,11 +9,19 @@ import br.com.recipe.model.Receita;
 
 public class ReceitaService {
 
+	private ReceitaDAO receitaDAO;
+	private IngredienteDAO ingredienteDAO;
+
+	public ReceitaService(ReceitaDAO receitaDAO, IngredienteDAO ingredienteDAO){
+		this.receitaDAO = receitaDAO;
+		this.ingredienteDAO = ingredienteDAO;
+	}
+
 	public List<Receita> buscaReceitas() {
 		try {
-			ReceitaDAO rdao = new ReceitaDAO();
+
 			List<Receita> receitas = new ArrayList<Receita>();
-			receitas = rdao.lista();
+			receitas = receitaDAO.lista();
 			return receitas;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -23,9 +31,7 @@ public class ReceitaService {
 	
 	public boolean CriaReceita(String receitaId) {
 		try{
-			ReceitaDAO receitaDAO = new ReceitaDAO();
-			IngredienteDAO ingredienteDAO =  new IngredienteDAO();
-			
+
 			Receita receita = receitaDAO.busca(receitaId);
 			return true;
 		}catch(Exception e) {
