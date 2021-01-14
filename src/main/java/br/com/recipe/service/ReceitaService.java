@@ -1,5 +1,6 @@
 package br.com.recipe.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +13,9 @@ public class ReceitaService {
 	private ReceitaDAO receitaDAO;
 	private IngredienteDAO ingredienteDAO;
 
-	public ReceitaService(ReceitaDAO receitaDAO, IngredienteDAO ingredienteDAO){
-		this.receitaDAO = receitaDAO;
-		this.ingredienteDAO = ingredienteDAO;
+	public ReceitaService() throws SQLException, ClassNotFoundException {
+		this.receitaDAO = getReceitaDAO();
+		this.ingredienteDAO = getIngredienteDAO();
 	}
 
 	public List<Receita> buscaReceitas() {
@@ -39,6 +40,14 @@ public class ReceitaService {
 			return false;
 		}
 
+	}
+
+	protected static ReceitaDAO getReceitaDAO() throws SQLException, ClassNotFoundException {
+		return new ReceitaDAO();
+	}
+
+	protected static IngredienteDAO getIngredienteDAO() throws SQLException, ClassNotFoundException {
+		return new IngredienteDAO();
 	}
 
 }
