@@ -15,9 +15,10 @@ import br.com.recipe.model.Receita;
 public class IngredienteDAO {
 
 	private Connection con;
+	private Conexao conexao;
 
-	public IngredienteDAO() throws ClassNotFoundException, SQLException {
-		this.con = Conexao.conecta();
+	public IngredienteDAO(Conexao conexao) throws ClassNotFoundException, SQLException {
+		this.con = conexao.conecta();
 	}
 
 	// LISTA INGREDIENTES----------------------------------------------------------------------------------------

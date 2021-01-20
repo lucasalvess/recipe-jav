@@ -14,8 +14,8 @@ public class UsuarioDAO {
 
 	private Connection con;
 
-	public UsuarioDAO() throws SQLException, ClassNotFoundException {
-		this.con = Conexao.conecta();
+	public UsuarioDAO(Conexao conexao) throws SQLException, ClassNotFoundException {
+		this.con = conexao.conecta();
 	}
 		
 		// INSERE Usuario--------------------------------------------------------------------------------------

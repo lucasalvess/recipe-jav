@@ -16,11 +16,11 @@ public class ReceitaDAO {
 
 	private Connection con;
 
-	public ReceitaDAO() throws SQLException, ClassNotFoundException {
-		this.con = Conexao.conecta();
+	public ReceitaDAO(Conexao conexao) throws SQLException, ClassNotFoundException {
+		this.con = conexao.conecta();
 	}
-		
-		// INSERE RECEITA--------------------------------------------------------------------------------------
+
+	// INSERE RECEITA--------------------------------------------------------------------------------------
 		public void salva(Receita receita, Usuario usuario) throws SQLException {
 			final String sql = "insert into receitas(nome,descricao,categoria,tempo,passos,usuario_id) values(?,?,?,?,?,?)";
 			try (PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
