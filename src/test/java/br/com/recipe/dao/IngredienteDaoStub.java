@@ -1,5 +1,6 @@
 package br.com.recipe.dao;
 
+import br.com.recipe.config.Conexao;
 import br.com.recipe.mocks.database.IngredienteRow;
 import br.com.recipe.model.Ingrediente;
 import br.com.recipe.model.Receita;
@@ -13,7 +14,8 @@ public class IngredienteDaoStub extends IngredienteDAO{
 
     private List<IngredienteRow> tabelaIngrediente = new ArrayList<>();
 
-    public IngredienteDaoStub() throws ClassNotFoundException, SQLException {
+    public IngredienteDaoStub(Conexao conexao) throws ClassNotFoundException, SQLException {
+        super(conexao);
     }
 
     public List<Ingrediente> lista() throws SQLException {

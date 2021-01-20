@@ -1,5 +1,6 @@
 package br.com.recipe.dao;
 
+import br.com.recipe.config.Conexao;
 import br.com.recipe.mocks.database.ReceitaRow;
 import br.com.recipe.model.Receita;
 import br.com.recipe.model.Usuario;
@@ -13,9 +14,14 @@ import java.util.stream.Collectors;
 public class ReceitaDaoStub extends ReceitaDAO {
 
     public ReceitaDaoStub() throws SQLException, ClassNotFoundException {
+        super(null);
     }
 
     private List<ReceitaRow> tabelaReceita = new ArrayList<>();
+
+    public ReceitaDaoStub(Conexao conexao) throws SQLException, ClassNotFoundException {
+        super(conexao);
+    }
 
     public void salva(Receita receita, Usuario usuario) throws SQLException {
         tabelaReceita.add(new ReceitaRow(usuario.getId(), receita));
