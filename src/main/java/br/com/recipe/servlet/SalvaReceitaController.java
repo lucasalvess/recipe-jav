@@ -18,6 +18,14 @@ import br.com.recipe.model.Usuario;
 
 public class SalvaReceitaController extends HttpServlet{
 
+	private ReceitaDAO receitaDAO;
+	private IngredienteDAO ingredientesDAO;
+
+	public SalvaReceitaController(ReceitaDAO receitaDAO, IngredienteDAO ingredientesDAO) {
+		this.receitaDAO = receitaDAO;
+		this.ingredientesDAO = ingredientesDAO;
+	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Receita receita = new Receita();
@@ -30,22 +38,19 @@ public class SalvaReceitaController extends HttpServlet{
 
 		try {
 			//Grava receitas
-			ReceitaDAO receitaDAO = new ReceitaDAO();
 			Usuario usuario = new Usuario();
 			HttpSession session = req.getSession();
 			usuario = (Usuario) session.getAttribute("usuario");
 			receitaDAO.salva(receita, usuario);
 			
 			//Grava ingredientes
-			IngredienteDAO ingredientesDAO = new IngredienteDAO();
 			List<Ingrediente> ingredientes = new ArrayList<>();
 			System.out.println(req.getParameter("ingredientes"));
 			resp.sendRedirect("painelController");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		
+		}
 		
 	}
 

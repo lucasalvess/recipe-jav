@@ -13,6 +13,13 @@ import br.com.recipe.model.Usuario;
 
 
 public class LoginController extends HttpServlet{
+
+	private UsuarioDAO usuarioDAO;
+
+	public LoginController(UsuarioDAO usuarioDAO){
+		this.usuarioDAO = usuarioDAO;
+	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -24,9 +31,6 @@ public class LoginController extends HttpServlet{
 		usuario.setSenha(senha);
 				
 		try {
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
-
-			
 			usuario = usuarioDAO.logar(usuario);
 			if(usuario.getId()!=0) {	
 

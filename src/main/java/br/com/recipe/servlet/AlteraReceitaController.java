@@ -12,11 +12,16 @@ import br.com.recipe.model.Receita;
 
 public class AlteraReceitaController extends HttpServlet {
 
+	private ReceitaDAO receitaDAO;
+
+	public AlteraReceitaController(ReceitaDAO receitaDAO) {
+		this.receitaDAO = receitaDAO;
+	}
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
-		ReceitaDAO receitaDAO = new ReceitaDAO();
 				
 		req.setAttribute("receita", receitaDAO.busca(req.getParameter("id")));
 		req.getRequestDispatcher("requenta-receita.jsp").forward(req, resp);
@@ -29,9 +34,6 @@ public class AlteraReceitaController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			
-			ReceitaDAO receitaDAO = new ReceitaDAO();
-			
 			Receita receita = new Receita();
 			receita.setId(Integer.parseInt(req.getParameter("id")));
 			receita.setNome(req.getParameter("nome"));

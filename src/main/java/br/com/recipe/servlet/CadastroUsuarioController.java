@@ -13,6 +13,12 @@ import br.com.recipe.model.Usuario;
 
 @WebServlet(urlPatterns = "/cadastra-usuario")
 public class CadastroUsuarioController extends HttpServlet{
+
+	private UsuarioDAO usuarioDAO;
+
+	public CadastroUsuarioController(UsuarioDAO usuarioDAO){
+		this.usuarioDAO = usuarioDAO;
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,7 +29,6 @@ public class CadastroUsuarioController extends HttpServlet{
 		usuario.setSenha(req.getParameter("senha"));
 		
 		try {
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			usuarioDAO.salva(usuario);
 			resp.sendRedirect("login");
 			

@@ -13,17 +13,23 @@ import br.com.recipe.dao.IngredienteDAO;
 import br.com.recipe.model.Ingrediente;
 
 public class PreparaReceitaController extends HttpServlet {
+
+	private final IngredienteDAO ingredienteDAO;
+
+	public PreparaReceitaController(IngredienteDAO ingredienteDAO){
+		this.ingredienteDAO = ingredienteDAO;
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
-			List<Ingrediente> ingredientes = new IngredienteDAO().lista();
+			List<Ingrediente> ingredientes = ingredienteDAO.lista();
 			req.setAttribute("ingredientes", ingredientes);
 			
 			req.getRequestDispatcher("prepara-receita.jsp").forward(req, resp);
 			
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}	
