@@ -39,13 +39,35 @@ public class ReceitaServiceTest {
     }
 
     @Test
-    public void criaReceita_ValidReceita_thenCallSave() throws SQLException {
+    public void criaReceita_validReceita_thenCallSave() throws SQLException {
         Usuario usuario = new Usuario();
         Receita receita = new Receita();
 
         receitaService.criaReceita(receita,usuario);
 
         Mockito.spy(receitaDaoStub).salva(receita,usuario);
+    }
+
+    @Test
+    public void criaReceita_validReceita_thenReturnReceita() {
+        Usuario usuario = new Usuario();
+        Receita receita = new Receita();
+
+        Receita result = receitaService.criaReceita(receita,usuario);
+
+        assert receita.equals(result);
+    }
+
+    @Test
+    public void criaReceita_validReceita_thenThrowSQLException() throws SQLException {
+        Usuario usuario = new Usuario();
+        Receita receita = new Receita();
+
+        ReceitaDAO receitaDAOMock = Mockito.mock(ReceitaDAO.class);
+        ReceitaService throwableReceitaService = new ReceitaService(receitaDAOMock,ingredienteDaoStub);
+
+        Mockito.doThrow(new SQLException()).when(receitaDAOMock).salva(receita,usuario);
+        Assertions.assertThrows(RuntimeException.class,()-> throwableReceitaService.criaReceita(receita,usuario));
     }
 
 }
