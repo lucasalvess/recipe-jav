@@ -5,7 +5,6 @@ import br.com.recipe.dao.ReceitaDAO;
 import br.com.recipe.model.Receita;
 import br.com.recipe.model.Usuario;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReceitaService {
@@ -20,10 +19,7 @@ public class ReceitaService {
 
     public List<Receita> buscaReceitas() {
         try {
-
-            List<Receita> receitas = new ArrayList<Receita>();
-            receitas = receitaDAO.lista();
-            return receitas;
+            return receitaDAO.lista();
         } catch (Exception e) {
             System.out.println(e);
             return null;
