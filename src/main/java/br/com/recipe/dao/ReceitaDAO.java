@@ -121,14 +121,13 @@ public class ReceitaDAO {
 
     //Busca receita by id ------------------------------------------------------------------------------------------
 
-    public ReceitaDTO busca(String id) throws SQLException {
+    public Receita busca(String id) throws SQLException {
         final String sql = "select * from receitas where id=?";
 
-        try {
-            PreparedStatement stmt = con.prepareStatement(sql);
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, Integer.parseInt(id));
 
-            ReceitaDTO receita = new ReceitaDTO();
+            Receita receita = new Receita();
 
             if (stmt.execute()) {
                 ResultSet rs = stmt.getResultSet();
@@ -141,12 +140,11 @@ public class ReceitaDAO {
                     receita.setPassos(rs.getString("passos"));
                     receita.setTempo(rs.getString("tempo"));
                 }
-                return receita;
             }
+            return receita;
+
         } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            con.close();
+            throw new RuntimeException(e);
         }
     }
 }
