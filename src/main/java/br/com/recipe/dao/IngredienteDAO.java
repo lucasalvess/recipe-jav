@@ -1,25 +1,19 @@
 package br.com.recipe.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import br.com.recipe.config.Conexao;
+import br.com.recipe.model.Ingrediente;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.recipe.config.Conexao;
-import br.com.recipe.model.Ingrediente;
-import br.com.recipe.model.Receita;
-
 public class IngredienteDAO {
 
-	private Connection con;
-	private Conexao conexao;
+    private final Connection con;
 
-	public IngredienteDAO(Conexao conexao) throws ClassNotFoundException, SQLException {
-		this.con = conexao.conecta();
-	}
+    public IngredienteDAO(Conexao conexao) throws ClassNotFoundException, SQLException {
+        this.con = conexao.conecta();
+    }
 
 	// LISTA INGREDIENTES----------------------------------------------------------------------------------------
 	public List<Ingrediente> lista() throws SQLException {
