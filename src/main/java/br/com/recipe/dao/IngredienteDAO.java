@@ -15,70 +15,61 @@ public class IngredienteDAO {
         this.con = conexao.conecta();
     }
 
-	// LISTA INGREDIENTES----------------------------------------------------------------------------------------
-	public List<Ingrediente> lista() throws SQLException {
+    // LISTA INGREDIENTES----------------------------------------------------------------------------------------
+    public List<Ingrediente> buscaIngredientesPorIdDaReceita() throws SQLException {
 
-		try {
+        final String sql = "select * from ingredientes";
 
-			Statement stmt = con.createStatement();// Statement prepara a query
-			List<Ingrediente> listaDeIngredientes = new ArrayList<Ingrediente>();// Lista que vai ser retornada com os
-			final String sql = "select * from ingredientes";																		// produtos
+        try (Statement stmt = con.createStatement()) {
 
-			if (stmt.execute(sql)) {
-				ResultSet rs = stmt.getResultSet();
+            List<Ingrediente> listaDeIngredientes = new ArrayList<>();
 
-				while (rs.next()) { // monta lista de ingredientes
+            if (stmt.execute(sql)) {
+                ResultSet rs = stmt.getResultSet();
 
-					Ingrediente ingrediente = new Ingrediente();
-					ingrediente.setId(rs.getInt("id"));
-					ingrediente.setNome(rs.getString("nome"));
-					listaDeIngredientes.add(ingrediente);
-				}
-			}
+                while (rs.next()) {
 
-			return listaDeIngredientes;
-		} catch (SQLException e) {
-			System.out.println(e);
-		}finally {
-			con.close();
-		}
-		return null;
-	}
-	
-	//INGREDIENTES DA RECEITA----------------------------------------------------------
-	public List<Ingrediente> lista(Receita receita) throws SQLException {
+                    Ingrediente ingrediente = new Ingrediente();
+                    ingrediente.setId(rs.getInt("id"));
+                    ingrediente.setNome(rs.getString("nome"));
+                    listaDeIngredientes.add(ingrediente);
+                }
+            }
 
-		try {
-			
-			final String sql = "SELECT ingredientes.id , ingredientes.nome FROM `ingredientes`,`composicao` WHERE ingredientes.id = composicao.ingrediente_id and composicao.receita_id = ?";
-			PreparedStatement stmt = con.prepareStatement(sql);// Statement prepara a query
-			
-			stmt.setInt(1, receita.getId());
-			
-			// Lista que vai ser retornada com os ingredientes
-			
-			List<Ingrediente> listaDeIngredientes = new ArrayList<Ingrediente>();															
-						
-			if (stmt.execute()) {
-				ResultSet rs = stmt.getResultSet();
+            return listaDeIngredientes;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-				while (rs.next()) { // monta lista de ingredientes
+    //INGREDIENTES DA RECEITA----------------------------------------------------------
+    public List<Ingrediente> buscaIngredientesPorIdDaReceita(Integer receitaId) {
 
-					Ingrediente ingrediente = new Ingrediente();
-					ingrediente.setId(rs.getInt("id"));
-					ingrediente.setNome(rs.getString("nome"));
-					listaDeIngredientes.add(ingrediente);
-				}
-			}
+        final String sql = "SELECT ingredientes.id , ingredientes.nome FROM `ingredientes`,`composicao` WHERE ingredientes.id = composicao.ingrediente_id and composicao.receita_id = ?";
 
-			return listaDeIngredientes;
-			
-		} catch (SQLException e) {
-			System.out.println(e);
-		}finally {
-			con.close();
-		}
-		return null;
-	}
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
+            stmt.setInt(1, receitaId);
+
+
+            List<Ingrediente> listaDeIngredientes = new ArrayList<>();
+
+            if (stmt.execute()) {
+                ResultSet rs = stmt.getResultSet();
+
+                while (rs.next()) {
+
+                    Ingrediente ingrediente = new Ingrediente();
+                    ingrediente.setId(rs.getInt("id"));
+                    ingrediente.setNome(rs.getString("nome"));
+                    listaDeIngredientes.add(ingrediente);
+                }
+            }
+
+            return listaDeIngredientes;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
