@@ -24,7 +24,7 @@ public class ReceitaDAO {
     }
 
     // INSERE RECEITA--------------------------------------------------------------------------------------
-    public Receita salva(Receita receita, Usuario usuario) throws SQLException {
+    public Receita salva(Receita receita, Integer usuarioId) {
         int receitaCriada;
         final String sql = "insert into receitas(nome,descricao,categoria,tempo,passos,usuario_id) values(?,?,?,?,?,?)";
         try (PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -33,7 +33,7 @@ public class ReceitaDAO {
             stmt.setString(3, receita.getCategoria());
             stmt.setString(5, receita.getPassos());
             stmt.setString(4, receita.getTempo());
-            stmt.setInt(6, usuario.getId());
+            stmt.setInt(6, usuarioId);
             stmt.execute();
 
             receitaCriada = stmt.getGeneratedKeys().findColumn("id");
