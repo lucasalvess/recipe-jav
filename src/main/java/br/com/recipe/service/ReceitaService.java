@@ -18,12 +18,7 @@ public class ReceitaService {
     }
 
     public List<Receita> buscaReceitas() {
-        try {
-            return receitaDAO.lista();
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
-        }
+        return receitaDAO.lista();
     }
     
     public ReceitaDTO criaReceita(Receita receita, Integer usuarioId) {

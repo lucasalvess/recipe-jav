@@ -45,14 +45,12 @@ public class ReceitaDAO {
     }
 
     // LISTA RECEITAS----------------------------------------------------------------------------------------
-    public List<Receita> lista() throws SQLException {
+    public List<Receita> lista() {
 
-        List<Receita> listaDeReceitas = new ArrayList<Receita>();// Lista que vai ser retornada com os produtos
+        final String sql = "select * from receitas";
+        List<Receita> listaDeReceitas = new ArrayList<Receita>();
 
-        try {
-            Statement stmt = con.createStatement();// Statement prepara a query
-
-            final String sql = "select * from receitas";
+        try (Statement stmt = con.createStatement()){
 
             if (stmt.execute(sql)) {
                 ResultSet rs = stmt.getResultSet();
@@ -69,10 +67,9 @@ public class ReceitaDAO {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e);
-        } finally {
-            con.close();
+            throw new RuntimeException(e.getMessage());
         }
+
         return listaDeReceitas;
     }
 
