@@ -16,7 +16,7 @@ public class IngredienteDAO {
     }
 
     // LISTA INGREDIENTES----------------------------------------------------------------------------------------
-    public List<Ingrediente> buscaIngredientesPorIdDaReceita() throws SQLException {
+    public List<Ingrediente> lista() throws SQLException {
 
         final String sql = "select * from ingredientes";
 
