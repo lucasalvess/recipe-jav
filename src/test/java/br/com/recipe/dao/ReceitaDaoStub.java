@@ -23,22 +23,26 @@ public class ReceitaDaoStub extends ReceitaDAO {
         super(conexao);
     }
 
-    public Receita salva(Receita receita, Usuario usuario) throws SQLException {
-        tabelaReceita.add(new ReceitaRow(usuario.getId(), receita));
+    @Override
+    public Receita salva(Receita receita,  Integer usuario) {
+        tabelaReceita.add(new ReceitaRow(usuario, receita));
         return receita;
     }
 
-    public List<Receita> lista() throws SQLException {
+    @Override
+    public List<Receita> lista() {
         return tabelaReceita.stream()
                 .map(ReceitaRow::converteReceita)
                 .collect(Collectors.toList());
     }
 
-    public boolean deleta(Receita receita) throws SQLException {
+    @Override
+    public boolean deleta(Receita receita) {
         return tabelaReceita.remove(receita);
     }
 
-    public void atualiza(Receita receita) throws SQLException {
+    @Override
+    public void atualiza(Receita receita) {
         Optional<ReceitaRow> row = tabelaReceita.stream()
                 .filter(linhaAtual -> linhaAtual.getId() == receita.getId())
                 .findFirst();
@@ -46,12 +50,13 @@ public class ReceitaDaoStub extends ReceitaDAO {
         row.ifPresent(
                 receitaRow -> {
                     int index = tabelaReceita.indexOf(receitaRow);
-                    ReceitaRow novaLinha = new ReceitaRow(receitaRow.getUsuarioId(),receita);
-                    tabelaReceita.set(index,novaLinha);
+                    ReceitaRow novaLinha = new ReceitaRow(receitaRow.getUsuarioId(), receita);
+                    tabelaReceita.set(index, novaLinha);
                 });
     }
 
-    public Receita busca(String id) throws SQLException {
+    @Override
+    public Receita busca(String id) {
         Optional<ReceitaRow> row = tabelaReceita.stream()
                 .filter(linhaAtual -> linhaAtual.getId() == Integer.parseInt(id))
                 .findFirst();
