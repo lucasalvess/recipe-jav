@@ -2,6 +2,7 @@ package br.com.recipe.service;
 
 import br.com.recipe.dao.IngredienteDAO;
 import br.com.recipe.dao.ReceitaDAO;
+import br.com.recipe.dto.ReceitaDTO;
 import br.com.recipe.model.Receita;
 import br.com.recipe.model.Usuario;
 
@@ -17,6 +18,10 @@ public class ReceitaService {
         this.ingredienteDAO = ingredienteDAO;
     }
 
+    public ReceitaDTO buscaReceita(){
+
+    }
+
     public List<Receita> buscaReceitas() {
         try {
             return receitaDAO.lista();
@@ -26,10 +31,9 @@ public class ReceitaService {
         }
     }
 
-    public Receita criaReceita(Receita receita, Usuario usuario) {
+    public void criaReceita(Receita receita, Usuario usuario) {
         try {
             receitaDAO.salva(receita,usuario);
-            return receita;
         } catch (Exception e) {
             System.out.println(e);
             throw new RuntimeException(e.getMessage());

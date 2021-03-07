@@ -23,8 +23,9 @@ public class ReceitaDaoStub extends ReceitaDAO {
         super(conexao);
     }
 
-    public void salva(Receita receita, Usuario usuario) throws SQLException {
+    public Receita salva(Receita receita, Usuario usuario) throws SQLException {
         tabelaReceita.add(new ReceitaRow(usuario.getId(), receita));
+        return receita;
     }
 
     public List<Receita> lista() throws SQLException {

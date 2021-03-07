@@ -13,6 +13,8 @@ import br.com.recipe.dto.ReceitaDTO;
 import br.com.recipe.model.Receita;
 import br.com.recipe.model.Usuario;
 
+import javax.management.RuntimeMBeanException;
+
 public class ReceitaDAO {
 
     private Connection con;
@@ -22,7 +24,7 @@ public class ReceitaDAO {
     }
 
     // INSERE RECEITA--------------------------------------------------------------------------------------
-    public ReceitaDTO salva(Receita receita, Usuario usuario) throws SQLException {
+    public Receita salva(Receita receita, Usuario usuario) throws SQLException {
         int receitaCriada;
         final String sql = "insert into receitas(nome,descricao,categoria,tempo,passos,usuario_id) values(?,?,?,?,?,?)";
         try (PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -36,10 +38,10 @@ public class ReceitaDAO {
 
             receitaCriada = stmt.getGeneratedKeys().findColumn("id");
 
-        } finally {
-            con.close();
+        } catch (Exception e){
+            throw new RuntimeException(e.getMessage());
         }
-        return
+        return busca(Integer.toString(receitaCriada));
     }
 
     // LISTA RECEITAS----------------------------------------------------------------------------------------
