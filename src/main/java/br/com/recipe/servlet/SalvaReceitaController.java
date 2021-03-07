@@ -15,19 +15,17 @@ import br.com.recipe.dao.ReceitaDAO;
 import br.com.recipe.model.Ingrediente;
 import br.com.recipe.model.Receita;
 import br.com.recipe.model.Usuario;
+import br.com.recipe.service.ReceitaService;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class SalvaReceitaController extends HttpServlet{
 
-	private ReceitaDAO receitaDAO;
-	private IngredienteDAO ingredientesDAO;
-
-	public SalvaReceitaController(ReceitaDAO receitaDAO, IngredienteDAO ingredientesDAO) {
-		this.receitaDAO = receitaDAO;
-		this.ingredientesDAO = ingredientesDAO;
-	}
+	private final ReceitaService receitaService;
+	private final IngredienteDAO ingredientesDAO;
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		Receita receita = new Receita();
 		
 		receita.setNome(req.getParameter("nome"));
@@ -38,10 +36,9 @@ public class SalvaReceitaController extends HttpServlet{
 
 		try {
 			//Grava receitas
-			Usuario usuario = new Usuario();
 			HttpSession session = req.getSession();
-			usuario = (Usuario) session.getAttribute("usuario");
-			receitaDAO.salva(receita, usuario);
+			Usuario usuario = (Usuario) session.getAttribute("usuario");
+			receitaService.criaReceita(receita, usuario.getId());
 			
 			//Grava ingredientes
 			List<Ingrediente> ingredientes = new ArrayList<>();

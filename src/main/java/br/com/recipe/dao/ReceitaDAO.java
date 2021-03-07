@@ -122,8 +122,7 @@ public class ReceitaDAO {
     }
 
     //Busca receita by id ------------------------------------------------------------------------------------------
-
-    public Receita busca(String id) throws SQLException {
+    public Receita busca(String id) {
         final String sql = "select * from receitas where id=?";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {

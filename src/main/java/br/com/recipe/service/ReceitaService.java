@@ -31,13 +31,8 @@ public class ReceitaService {
         }
     }
 
-    public void criaReceita(Receita receita, Usuario usuario) {
-        try {
-            receitaDAO.salva(receita,usuario);
-        } catch (Exception e) {
-            System.out.println(e);
-            throw new RuntimeException(e.getMessage());
-        }
+    public ReceitaDTO criaReceita(Receita receita, Integer usuarioId) {
+        return new ReceitaDTO(receitaDAO.salva(receita,usuarioId));
     }
 
 }
