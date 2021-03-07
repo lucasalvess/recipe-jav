@@ -2,17 +2,19 @@ package br.com.recipe.service;
 
 import br.com.recipe.dao.ConexaoStub;
 import br.com.recipe.dao.IngredienteDaoStub;
-import br.com.recipe.dao.ReceitaDAO;
 import br.com.recipe.dao.ReceitaDaoStub;
+import br.com.recipe.dto.ReceitaDTO;
+import br.com.recipe.model.Ingrediente;
 import br.com.recipe.model.Receita;
-import br.com.recipe.model.Usuario;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReceitaServiceTest {
 
@@ -39,35 +41,28 @@ public class ReceitaServiceTest {
     }
 
     @Test
-    public void criaReceita_validReceita_thenCallSave() throws SQLException {
-        Usuario usuario = new Usuario();
+    public void buscaReceitas_existentList_thenReturnList() {
+        Integer usuarioId = 1;
+
         Receita receita = new Receita();
+        receita.setIngredientes(Collections.singletonList(new Ingrediente()));
+        receita.setNome("Pizza");
 
-        receitaService.criaReceita(receita,usuario);
+        receitaDaoStub.salva(receita,usuarioId);
 
-        Mockito.spy(receitaDaoStub).salva(receita,usuario);
+        List<Receita> receitas = receitaService.buscaReceitas();
+        assertThat(receitas.get(0)).isEqualToComparingFieldByField(receita);
     }
 
     @Test
-    public void criaReceita_validReceita_thenReturnReceita() {
-        Usuario usuario = new Usuario();
+    public void criaReceita_validReceita_thenCallSaveAndReturnReceita()  {
+        Integer usuarioId = 1;
         Receita receita = new Receita();
 
-        Receita result = receitaService.criaReceita(receita,usuario);
+        ReceitaDTO result = receitaService.criaReceita(receita,1);
 
-        assert receita.equals(result);
-    }
-
-    @Test
-    public void criaReceita_validReceita_thenThrowSQLException() throws SQLException {
-        Usuario usuario = new Usuario();
-        Receita receita = new Receita();
-
-        ReceitaDAO receitaDAOMock = Mockito.mock(ReceitaDAO.class);
-        ReceitaService throwableReceitaService = new ReceitaService(receitaDAOMock,ingredienteDaoStub);
-
-        Mockito.doThrow(new SQLException()).when(receitaDAOMock).salva(receita,usuario);
-        Assertions.assertThrows(RuntimeException.class,()-> throwableReceitaService.criaReceita(receita,usuario));
+        assertThat(new ReceitaDTO(receita)).isEqualToComparingFieldByField(result);
+        Mockito.spy(receitaDaoStub).salva(receita,1);
     }
 
 }

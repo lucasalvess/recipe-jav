@@ -1,28 +1,29 @@
 package br.com.recipe.servlet;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.com.recipe.dao.IngredienteDAO;
-import br.com.recipe.dao.ReceitaDAO;
 import br.com.recipe.model.Ingrediente;
 import br.com.recipe.model.Receita;
 import br.com.recipe.model.Usuario;
 import br.com.recipe.service.ReceitaService;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class SalvaReceitaController extends HttpServlet{
 
 	private final ReceitaService receitaService;
 	private final IngredienteDAO ingredientesDAO;
+
+	public SalvaReceitaController(ReceitaService receitaService, IngredienteDAO ingredientesDAO) {
+		this.receitaService = receitaService;
+		this.ingredientesDAO = ingredientesDAO;
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -38,11 +39,19 @@ public class SalvaReceitaController extends HttpServlet{
 			//Grava receitas
 			HttpSession session = req.getSession();
 			Usuario usuario = (Usuario) session.getAttribute("usuario");
-			receitaService.criaReceita(receita, usuario.getId());
 			
 			//Grava ingredientes
+			List<String> ingredientesSelecionados = Arrays.asList(req.getParameterValues("ingredientes"));
 			List<Ingrediente> ingredientes = new ArrayList<>();
-			System.out.println(req.getParameter("ingredientes"));
+
+			ingredientesSelecionados.forEach(
+					ingrediente -> ingredientes.add(new Ingrediente(1, ingrediente))
+			);
+
+			receita.setIngredientes(ingredientes);
+
+			receitaService.criaReceita(receita, usuario.getId());
+
 			resp.sendRedirect("painelController");
 			
 		} catch (Exception e) {
